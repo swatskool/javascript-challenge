@@ -1,12 +1,15 @@
 // from data.js
+//creating a copy of the data
 const tableData = data;
+const tbody =d3.select('tbody');
+
 function printName(name) {
     console.log(name['datetime']);
   }
-const tbody =d3.select('tbody')
-// console.log(tableData)
-// YOUR CODE HERE!
 
+
+// creating functions and utilities
+// function to publish the data table
 function UFO_table(subdata){
   tbody.html('');
   subdata.forEach((drow)=> {
@@ -18,6 +21,8 @@ function UFO_table(subdata){
   });
 }
 
+
+// function to create a filter list based on users choices
 var filters = {}
 function updateFilters(){
   var changedElements = d3.select(this).select('input');
@@ -33,6 +38,8 @@ function updateFilters(){
   filter_data();
 }
 
+
+// function to filter the data based on the list
 function filter_data(){
   let localdata = tableData;
   Object.entries(filters).forEach(([key, value])=>{
@@ -42,7 +49,7 @@ function filter_data(){
   UFO_table(localdata)
 }
 
-
+// function to populate the table when the data is selected
 function whenclicked(){
   const inDate = d3.select('#datetime').property('value');
   let localdata = tableData;
