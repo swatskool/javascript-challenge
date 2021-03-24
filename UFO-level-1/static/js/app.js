@@ -25,9 +25,11 @@ function UFO_table(subdata){
 // function to create a filter list based on users choices
 var filters = {}
 function updateFilters(){
-  var changedElements = d3.select(this).select('input');
+  var changedElements = (d3.select(this)).select('input');
+  console.log(changedElements)
   var elementValue = changedElements.property('value');
   var ID = changedElements.attr('id');
+  console.log(changedElements.value)
   if (elementValue){
     filters[ID]=elementValue;
 
@@ -59,8 +61,8 @@ function whenclicked(){
   }
   UFO_table(localdata);
 }
-d3.selectAll("#filter-btn").on('click', whenclicked);
-d3.selectAll("#filter-btn").on('change', updateFilters);
+// d3.selectAll("#filter-btn").on('click', whenclicked);
+d3.selectAll("#filter-btn").on('click', updateFilters);
 
 UFO_table(tableData)
 
