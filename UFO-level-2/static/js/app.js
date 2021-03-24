@@ -33,9 +33,25 @@ function myfilter(){
   if (inState){localdata=localdata.filter(row => row.state=== inState);}
   if (inCountry){localdata=localdata.filter(row => row.country=== inCountry);}
   if (inShape) {localdata=localdata.filter(row => row.shape=== inShape);}
-  // if (localdata.length==0) {localdata=localdata.filter(row => row.datetime==='---'));}
-
-  UFO_table(localdata);
+  // incase no relevant data is found !
+  if (localdata.length==0) {
+    tbody.html('');
+    row = tbody.append('tr');
+    cell = row.append('td');
+    cell = row.append('td');
+    cell = row.append('td');
+    cell = row.append('td');
+    cell = row.append('td');
+    cell.align="center"
+    cell.text('  ************************  No Data Found !  Try another search  ************************  ');
+    cell = row.append('td');
+    cell = row.append('td');
+  }
+  else {
+    console.log(localdata)
+    UFO_table(localdata);
+  }
+  
 }
 
 
