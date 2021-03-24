@@ -25,11 +25,12 @@ function UFO_table(subdata){
 // function to create a filter list based on users choices
 var filters = {}
 function updateFilters(){
-  var changedElements = (d3.select(this)).select('input');
-  console.log(changedElements)
+  // var changedElements = (d3.select(this)).select('input');
+  var changedElements = (d3).select('.form-group');
+  console.log(changedElements);
   var elementValue = changedElements.property('value');
   var ID = changedElements.attr('id');
-  console.log(changedElements.value)
+  console.log(changedElements.value);
   if (elementValue){
     filters[ID]=elementValue;
 
@@ -48,23 +49,37 @@ function filter_data(){
     localdata=localdata.filter(row=> row[key] ===value);
   }
   );
-  UFO_table(localdata)
-}
-
-// function to populate the table when the data is selected
-function whenclicked(){
-  const inDate = d3.select('#datetime').property('value');
-  let localdata = tableData;
-  if (inDate){
-    localdata=localdata.filter(row => row.datetime=== inDate);
-
-  }
   UFO_table(localdata);
 }
-// d3.selectAll("#filter-btn").on('click', whenclicked);
-d3.selectAll("#filter-btn").on('click', updateFilters);
 
-UFO_table(tableData)
+function myfilter(){
+  const inDate = d3.select('#datetime').property('value');
+  const inCity = d3.select('#city').property('value');
+  const inState = d3.select('#state').property('value');
+  const inCountry = d3.select('#country').property('value');
+  const inShape = d3.select('#shape').property('value');
+
+  let localdata = tableData;
+  if (inDate){localdata=localdata.filter(row => row.datetime=== inDate);}
+  if (inCity){localdata=localdata.filter(row => row.city=== inCity);}
+  if (inState){localdata=localdata.filter(row => row.state=== inState);}
+  if (inCountry){localdata=localdata.filter(row => row.country=== inCountry);}
+  if (inShape) {localdata=localdata.filter(row => row.shape=== inShape);}
+  console.log(localdata.length)
+  if (localdata.length==0) {localdata=localdata.filter(row => console.log(row.city));}
+  console.log(localdata.length==0);
+  console.log(localdata);
+  // console.log(localdata.datetime)
+  UFO_table(localdata);
+}
+
+
+
+// d3.selectAll("#filter-btn").on('click', updateFilters);
+d3.selectAll("#filter-btn").on('click', myfilter);
+// d3.selectAll("#filter-btn").on('change', updateFilters);
+
+UFO_table(tableData);
 
 
 
